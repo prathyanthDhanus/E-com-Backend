@@ -62,17 +62,17 @@ const userLogin = async (req, res) => {
 
 const addToWishlis = async(req,res)=>{
          const {userId,productId}  = req.body;
-         console.log(req.body);
+        //  console.log(req.body);
          let Wishlist = await wishlist.findOne({ user: userId });
-        console.log(Wishlist);
+        // console.log(Wishlist);
         if (!Wishlist) {
           Wishlist = new wishlist({ user: userId, products: [] });
         }
          // Check if the product is already in the wishlist
          if (!Wishlist.products.includes(productId)) {
            // Add the product to the wishlist
-           wishlist.products.push(productId);
-           await wishlist.save();
+           Wishlist.products.push(productId);
+           await Wishlist.save();
            return res.status(200).json({ message: 'Product added to wishlist successfully' });
          } else {
            return res.status(400).json({ message: 'Product is already in the wishlist' });

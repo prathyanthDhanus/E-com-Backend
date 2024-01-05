@@ -7,7 +7,7 @@ const product = require("../models/productSchema");
 
 const adminRegister = async (req, res) => {
   const { adminName, email, password } = req.body;
-  //   console.log(req.body);
+ 
   const identifyAdmin = await admin.findOne({ email: email });
 
   if (identifyAdmin) {
@@ -166,9 +166,9 @@ const getSubCategory = async (req, res) => {
 
 const createProduct = async (req, res) => {
   const { title, ram, price, description, countInStock, image } = req.body;
-  console.log(req.body);
+  
   const subCategoryId = req.params.subCategoryId;
-  console.log(subCategoryId);
+  
 
   // Check if the product exists
   const existingProduct = await product.findOne({
